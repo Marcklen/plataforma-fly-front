@@ -1,0 +1,23 @@
+.register-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 48px;
+}
+
+mat-card {
+    width: 400px;
+    padding: 16px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.divider {
+    margin: 16px 0;
+}
+
+.mensagem-sucesso {
+    color: green;
+    font-weight: bold;
+}

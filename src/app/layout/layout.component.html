@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+    <span>Plataforma Fly</span>
+    <span class="spacer"></span>
+    <span *ngIf="username">Olá, {{ username }}!</span>
+    <span *ngIf="isAdmin" class="admin-tag">[ADMIN]</span>
+    <button mat-button (click)="logout()">Sair</button>
+</mat-toolbar>
+
+<div class="content">
+    <router-outlet></router-outlet>
+</div>
