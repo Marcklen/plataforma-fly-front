@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth.service';
 
@@ -12,7 +13,7 @@ export class LoginComponent {
   form!: FormGroup;
   error = '';
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private snackBar: MatSnackBar) {
     this.form = this.fb.group({
       login: ['', Validators.required],
       password: ['', Validators.required]
@@ -25,9 +26,16 @@ export class LoginComponent {
         next: (response: any) => {
           this.authService.saveToken(response.token);
           this.router.navigate(['/home']);
+          this.snackBar.open('Login realizado com sucesso!', 'Fechar', {
+            duration: 3000,
+            panelClass: ['feedback-successo']
+          });
         },
         error: () => {
-          this.error = 'Credenciais Inválidas'
+          this.snackBar.open('Credenciais inválidas!', 'Fechar', {
+            duration: 3000,
+            panelClass: ['feedback-erro']
+          });
         }
       });
     }

@@ -8,7 +8,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'register', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   {
@@ -17,7 +17,6 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent }
     ]
   },
-  { path: '**', redirectTo: 'login' }, // Redireciona para o login se a rota não for encontrada
   { path: '**', component: NotFoundComponent } // Rota para página não encontrada
 ];
 

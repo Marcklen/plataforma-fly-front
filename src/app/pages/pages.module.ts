@@ -7,6 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { MatDividerModule } from '@angular/material/divider';
     MatCardModule,
     MatCheckboxModule,
     MatButtonModule,
-    MatDividerModule
+    MatDividerModule,
+    RouterModule
   ],
    exports: [NotFoundComponent, HomeComponent]
 })
