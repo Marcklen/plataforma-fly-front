@@ -8,12 +8,16 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { UsuarioDashboardComponent } from './usuario-dashboard/usuario-dashboard.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    AdminDashboardComponent,
+    UsuarioDashboardComponent
   ],
   imports: [
     CommonModule,

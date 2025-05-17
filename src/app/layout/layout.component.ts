@@ -11,7 +11,7 @@ export class LayoutComponent {
   isAdmin = false;
   username: string | null = null;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(public authService: AuthService, private router: Router) {
     this.username = this.authService.getUsername();
     this.isAdmin = this.authService.isAdmin();
   }

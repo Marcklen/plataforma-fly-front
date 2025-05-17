@@ -9,15 +9,11 @@ mat-card {
     padding: 16px;
 }
 
-.full-width {
-    width: 100%;
-}
-
 .divider {
     margin: 16px 0;
 }
 
-.mensagem-sucesso {
-    color: green;
-    font-weight: bold;
+button mat-spinner {
+  display: inline-block;
+  vertical-align: middle;
 }

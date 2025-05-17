@@ -10,6 +10,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { RouterModule } from '@angular/router';
     MatCheckboxModule,
     MatButtonModule,
     MatDividerModule,
-    RouterModule
+    RouterModule,
+    MatProgressSpinnerModule
   ],
   exports: [LoginComponent, RegisterComponent]
 })

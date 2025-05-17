@@ -1,11 +1,20 @@
 <mat-toolbar color="primary">
-    <span>Plataforma Fly</span>
-    <span class="spacer"></span>
-    <span *ngIf="username">Olá, {{ username }}!</span>
-    <span *ngIf="isAdmin" class="admin-tag">[ADMIN]</span>
-    <button mat-button (click)="logout()">Sair</button>
+  <span>Plataforma Fly</span>
+  <span class="spacer"></span>
+
+  <ng-container *ngIf="authService.getRoles().includes('ROLE_ADMIN')">
+    <button mat-button routerLink="/admin-dashboard">Painel Admin</button>
+  </ng-container>
+
+  <ng-container *ngIf="authService.getRoles().includes('ROLE_USER')">
+    <button mat-button routerLink="/usuario-dashboard">Painel Usuário</button>
+  </ng-container>
+
+  <span *ngIf="username">Olá, {{ username }}!</span>
+  <span *ngIf="isAdmin" class="admin-tag">[ADMIN]</span>
+  <button mat-button (click)="logout()">Sair</button>
 </mat-toolbar>
 
 <div class="content">
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>

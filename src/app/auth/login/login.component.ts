@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/core/auth.service';
 export class LoginComponent {
   form!: FormGroup;
   error = '';
+  carregando = false;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private snackBar: MatSnackBar) {
     this.form = this.fb.group({
@@ -20,24 +21,36 @@ export class LoginComponent {
     });
   }
 
-  onSubmit(): void{
+  onSubmit(): void {
     if (this.form.valid) {
+      this.carregando = true;
+
       this.authService.login(this.form.value).subscribe({
-        next: (response: any) => {
-          this.authService.saveToken(response.token);
-          this.router.navigate(['/home']);
+        next: (response) => {
+          const token = response.token;
+          this.authService.saveToken(token);
+
+          // Decodifica e redireciona com base nas roles
+          const roles = this.authService.getRoles();
+          if (roles.includes('ROLE_ADMIN')) {
+            this.router.navigate(['/admin-dashboard']);
+          } else {
+            this.router.navigate(['/usuario-dashboard']);
+          }
           this.snackBar.open('Login realizado com sucesso!', 'Fechar', {
             duration: 3000,
-            panelClass: ['feedback-successo']
+            panelClass: ['feedback-sucesso'],
+            verticalPosition: 'top'
           });
         },
         error: () => {
           this.snackBar.open('Credenciais inválidas!', 'Fechar', {
             duration: 3000,
-            panelClass: ['feedback-erro']
+            panelClass: ['feedback-erro'],
+            verticalPosition: 'top'
           });
         }
-      });
+      }).add(() => this.carregando = false);
     }
   }
 }

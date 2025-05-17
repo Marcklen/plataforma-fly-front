@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-register',
@@ -13,8 +14,9 @@ export class RegisterComponent {
   form!: FormGroup;
   sucesso = false;
   erro = false;
+  carregando = false;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private snackBar: MatSnackBar, private router: Router) {
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private snackBar: MatSnackBar, private router: Router) {
     this.form = this.fb.group({
       nome: ['', Validators.required],
       login: ['', Validators.required],
@@ -26,11 +28,13 @@ export class RegisterComponent {
 
   onSubmit(): void {
     if (this.form.valid) {
-      this.http.post('http://localhost:8080/usuario', this.form.value).subscribe({
+      this.carregando = true;
+      this.usuarioService.cadastrarUsuario(this.form.value).subscribe({
         next: () => {
           this.snackBar.open('Usuário cadastrado com sucesso!', 'Fechar', {
             duration: 3000,
-            panelClass: ['feedback-sucesso']
+            panelClass: ['feedback-sucesso'],
+            verticalPosition: 'top'
           });
           this.form.reset();
           setTimeout(() => this.router.navigate(['/login']), 3000);
@@ -38,10 +42,11 @@ export class RegisterComponent {
         error: () => {
           this.snackBar.open('Erro ao cadastrar usuário. Tente novamente.', 'Fechar', {
             duration: 3000,
-            panelClass: ['feedback-erro']
+            panelClass: ['feedback-erro'],
+            verticalPosition: 'top'
           });
         }
-      });
+      }).add(() => this.carregando = false);
     }
   }
 
