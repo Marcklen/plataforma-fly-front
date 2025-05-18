@@ -2,12 +2,35 @@
     flex: 1 1 auto;
 }
 
-.admin-tag {
-    margin-left: 8px;
-    font-weight: bold;
-    color: yellow;
-}
-
 .content {
     padding: 16px;
+}
+
+.sidenav-container {
+  height: 100vh;
+}
+
+.sidenav {
+  width: 220px;
+}
+
+.menu-button {
+  margin-right: 12px;
+}
+
+mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.app-title {
+  font-weight: bold;
+  font-size: 18px;
 }

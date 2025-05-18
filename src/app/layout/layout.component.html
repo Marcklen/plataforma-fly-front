@@ -1,20 +1,37 @@
-<mat-toolbar color="primary">
-  <span>Plataforma Fly</span>
-  <span class="spacer"></span>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer mode="side" opened class="sidenav">
+    <mat-toolbar color="primary">Menu</mat-toolbar>
 
-  <ng-container *ngIf="authService.getRoles().includes('ROLE_ADMIN')">
-    <button mat-button routerLink="/admin-dashboard">Painel Admin</button>
-  </ng-container>
+    <mat-nav-list>
+      <ng-container *ngIf="authService.getRoles().includes('ROLE_ADMIN')">
+        <a mat-list-item routerLink="/admin-dashboard">Painel Admin</a>
+      </ng-container>
+      <ng-container *ngIf="authService.getRoles().includes('ROLE_USER')">
+        <a mat-list-item routerLink="/usuario-dashboard">Painel Usuário</a>
+      </ng-container>
+      <a mat-list-item routerLink="/home">Início</a>
+      <a mat-list-item (click)="logout()">Sair</a>
+      <ng-container *ngIf="authService.isAuthenticated()">
+        <a mat-button routerLink="/usuarios">Usuários</a>
+      </ng-container>
+    </mat-nav-list>
+  </mat-sidenav>
 
-  <ng-container *ngIf="authService.getRoles().includes('ROLE_USER')">
-    <button mat-button routerLink="/usuario-dashboard">Painel Usuário</button>
-  </ng-container>
+  <mat-sidenav-content>
+    <!-- TOPO -->
+    <mat-toolbar color="primary" class="toolbar">
+      <button mat-icon-button (click)="drawer.toggle()" class="menu-button">
+        <mat-icon>menu</mat-icon>
+      </button>
 
-  <span *ngIf="username">Olá, {{ username }}!</span>
-  <span *ngIf="isAdmin" class="admin-tag">[ADMIN]</span>
-  <button mat-button (click)="logout()">Sair</button>
-</mat-toolbar>
+      <span class="app-title">Plataforma Fly</span>
+      <span class="spacer"></span>
+      <span *ngIf="username">Olá, {{ username }}!</span>
+    </mat-toolbar>
 
-<div class="content">
-  <router-outlet></router-outlet>
-</div>
+    <!-- CONTEÚDO -->
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

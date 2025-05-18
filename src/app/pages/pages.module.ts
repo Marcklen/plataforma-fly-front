@@ -10,14 +10,15 @@ import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { UsuarioDashboardComponent } from './usuario-dashboard/usuario-dashboard.component';
-
+import { UsuariosListComponent } from './usuarios/usuarios-list/usuarios-list.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     NotFoundComponent,
     AdminDashboardComponent,
-    UsuarioDashboardComponent
+    UsuarioDashboardComponent,
+    UsuariosListComponent,
   ],
   imports: [
     CommonModule,
@@ -26,8 +27,13 @@ import { UsuarioDashboardComponent } from './usuario-dashboard/usuario-dashboard
     MatCheckboxModule,
     MatButtonModule,
     MatDividerModule,
-    RouterModule
+    RouterModule,
   ],
-   exports: [NotFoundComponent, HomeComponent]
+  exports: [
+    NotFoundComponent,
+    HomeComponent,
+    AdminDashboardComponent,
+    UsuarioDashboardComponent,
+  ],
 })
-export class PagesModule { }
+export class PagesModule {}
