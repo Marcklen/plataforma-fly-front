@@ -28,3 +28,15 @@
     justify-content: center;
     align-items: center;
 }
+
+th.mat-column-nome,
+th.mat-column-login,
+th.mat-column-email,
+th.mat-column-admin,
+th.mat-column-criadoEm,
+th.mat-column-atualizadoEm,
+th.mat-column-acoes {
+    color: #3f51b5;
+    font-weight: bold;
+    background-color: #f5f5f5;
+}
