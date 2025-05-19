@@ -19,6 +19,7 @@ import { UsuariosFormComponent } from './usuarios/usuarios-form/usuarios-form.co
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DataHoraFormatadaPipe } from '../shared/pipes/data-hora-formatada.pipe';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     UsuarioDashboardComponent,
     UsuariosListComponent,
     UsuariosFormComponent,
+    DataHoraFormatadaPipe
   ],
   imports: [
     CommonModule,

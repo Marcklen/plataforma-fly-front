@@ -21,9 +21,11 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthInterceptor } from './core/auth.interceptor';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
-  declarations: [AppComponent, LayoutComponent],
+  declarations: [AppComponent, LayoutComponent, ConfirmDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -43,6 +45,7 @@ import { AuthInterceptor } from './core/auth.interceptor';
     MatSidenavModule,
     MatListModule,
     MatIconModule,
+    MatDialogModule
   ],
   providers: [
     {

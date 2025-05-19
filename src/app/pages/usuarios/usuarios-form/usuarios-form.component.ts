@@ -11,6 +11,7 @@ import { Usuario } from 'src/app/shared/models/usuario.model';
   styleUrls: ['./usuarios-form.component.scss'],
 })
 export class UsuariosFormComponent implements OnInit {
+
   form!: FormGroup;
   isEdit = false;
   carregando = false;
@@ -79,4 +80,9 @@ export class UsuariosFormComponent implements OnInit {
       },
     });
   }
+
+  cancelar() {
+    this.router.navigate(['/usuarios']);
+  }
+  
 }

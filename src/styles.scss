@@ -3,13 +3,15 @@
 ------------------------------- */
 
 .feedback-sucesso {
-  background-color: #4caf50 !important;
-  color: white;
+    background-color: #4caf50 !important;
+    color: white;
+    font-weight: bold;
 }
 
 .feedback-erro {
-  background-color: #f44336 !important;
-  color: white;
+    background-color: #f44336 !important;
+    color: white;
+    font-weight: bold;
 }
 
 .auth-link {
@@ -47,16 +49,17 @@
 }
 
 button mat-spinner {
-  display: inline-block;
-  vertical-align: middle;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 
 /* Toast de sucesso e falhas */
+
 ::ng-deep .mat-mdc-snack-bar-container {
-  margin-top: 80px;
-  border-radius: 8px;
-  font-weight: 500;
+    margin-top: 80px;
+    border-radius: 8px;
+    font-weight: 500;
 }
 
 ::ng-deep .mat-mdc-snack-bar-container.feedback-sucesso {

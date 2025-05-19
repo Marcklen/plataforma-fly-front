@@ -45,7 +45,7 @@
                 <ng-container matColumnDef="criadoEm">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Criado Em </th>
                     <td mat-cell *matCellDef="let usuario">
-                        {{ usuario.criadoEm | date: 'dd/MM/yyyy' }} às {{ usuario.criadoEm | date: 'hh:mm a' }}
+                        {{ usuario.criadoEm | dataHoraFormatada }}
                     </td>
                 </ng-container>
 
@@ -53,7 +53,7 @@
                 <ng-container matColumnDef="atualizadoEm">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Atualizado Em </th>
                     <td mat-cell *matCellDef="let usuario">
-                        {{ usuario.atualizadoEm ? (usuario.atualizadoEm | date: 'dd/MM/yyyy' + ' às ' + usuario.atualizadoEm | date: 'hh:mm a') : '' }}
+                        {{ usuario.atualizadoEm ? (usuario.atualizadoEm | dataHoraFormatada) : '' }}
                     </td>
                 </ng-container>
 

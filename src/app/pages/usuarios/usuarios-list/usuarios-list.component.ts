@@ -5,6 +5,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-usuarios-list',
@@ -25,25 +28,38 @@ export class UsuariosListComponent implements OnInit {
   dataSource = new MatTableDataSource<Usuario>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private usuarioService: UsuarioService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.carregarUsuarios();
   }
 
+  ngAfterViewInit(): void {
+    // Atribui o paginador e o sort ao dataSource
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
   carregarUsuarios(): void {
     this.usuarioService.buscarUsuarios().subscribe({
       next: (usuarios) => {
         this.dataSource.data = usuarios;
-        this.dataSource.paginator = this.paginator;
+        // this.dataSource.paginator = this.paginator;
       },
       error: (err) => {
         console.error('Erro ao carregar usuários:', err);
+        this.snackBar.open('Erro ao carregar usuários.', 'Fechar', {
+          duration: 3000,
+          panelClass: ['feedback-erro'],
+          verticalPosition: 'top',
+        });
       },
     });
   }
@@ -51,6 +67,10 @@ export class UsuariosListComponent implements OnInit {
   aplicarFiltro(event: Event): void {
     const filtroValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filtroValue.trim().toLowerCase();
+    // Resetar o paginador para a primeira página ao aplicar filtro
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   // Método para abrir o modal de criação de usuário
@@ -59,31 +79,40 @@ export class UsuariosListComponent implements OnInit {
   }
 
   editarUsuario(usuario: Usuario): void {
-    this.router.navigate(['/usuarios', usuario.id]);
+    this.router.navigate([`/usuarios/editar/${usuario.id}`]);
   }
 
   excluirUsuario(usuario: Usuario): void {
-    const confirmacao = confirm(
-      `Tem certeza que deseja excluir o usuário ${usuario.nome}?`
-    );
-    if (confirmacao) {
-      this.usuarioService.excluirUsuario(usuario.id!).subscribe({
-        next: () => {
-          this.snackBar.open('Usuário excluído com sucesso.', 'Fechar', {
-            duration: 3000,
-            panelClass: ['feedback-sucesso'],
-            verticalPosition: 'top',
-          });
-          this.carregarUsuarios(); // recarrega lista
-        },
-        error: () => {
-          this.snackBar.open('Erro ao excluir o usuário.', 'Fechar', {
-            duration: 3000,
-            panelClass: ['feedback-erro'],
-            verticalPosition: 'top',
-          });
-        },
-      });
-    }
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '360px',
+      data: {
+        titulo: 'Excluir Usuário',
+        mensagem: `Tem certeza que deseja excluir o usuário "${usuario.nome}"?`,
+        textoConfirmar: 'Sim, excluir',
+        textoCancelar: 'Cancelar',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((confirmado: boolean) => {
+      if (confirmado) {
+        this.usuarioService.excluirUsuario(usuario.id!).subscribe({
+          next: () => {
+            this.snackBar.open('Usuário excluído com sucesso!', 'Fechar', {
+              duration: 3000,
+              panelClass: ['feedback-sucesso'],
+              verticalPosition: 'top',
+            });
+            this.carregarUsuarios();
+          },
+          error: () => {
+            this.snackBar.open('Erro ao excluir o usuário.', 'Fechar', {
+              duration: 3000,
+              panelClass: ['feedback-erro'],
+              verticalPosition: 'top',
+            });
+          },
+        });
+      }
+    });
   }
 }
