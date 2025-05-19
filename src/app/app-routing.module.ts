@@ -10,6 +10,7 @@ import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard
 import { UsuarioDashboardComponent } from './pages/usuario-dashboard/usuario-dashboard.component';
 import { RoleGuard } from './core/role.guard';
 import { UsuariosListComponent } from './pages/usuarios/usuarios-list/usuarios-list.component';
+import { UsuariosFormComponent } from './pages/usuarios/usuarios-form/usuarios-form.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -39,6 +40,18 @@ const routes: Routes = [
         component: UsuariosListComponent,
         canActivate: [RoleGuard],
         data: { roles: ['ROLE_ADMIN', 'ROLE_USER'] }, // Ambos acessam
+      },
+      {
+        path: 'usuarios/novo',
+        component: UsuariosFormComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['ROLE_ADMIN', 'ROLE_USER'] },
+      },
+      {
+        path: 'usuarios/editar/:id',
+        component: UsuariosFormComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['ROLE_ADMIN', 'ROLE_USER'] },
       },
     ],
   },

@@ -11,6 +11,14 @@ import { RouterModule } from '@angular/router';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { UsuarioDashboardComponent } from './usuario-dashboard/usuario-dashboard.component';
 import { UsuariosListComponent } from './usuarios/usuarios-list/usuarios-list.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSortModule } from '@angular/material/sort';
+import { UsuariosFormComponent } from './usuarios/usuarios-form/usuarios-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -19,6 +27,7 @@ import { UsuariosListComponent } from './usuarios/usuarios-list/usuarios-list.co
     AdminDashboardComponent,
     UsuarioDashboardComponent,
     UsuariosListComponent,
+    UsuariosFormComponent,
   ],
   imports: [
     CommonModule,
@@ -28,12 +37,21 @@ import { UsuariosListComponent } from './usuarios/usuarios-list/usuarios-list.co
     MatButtonModule,
     MatDividerModule,
     RouterModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatIconModule,
+    MatSortModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     NotFoundComponent,
     HomeComponent,
     AdminDashboardComponent,
     UsuarioDashboardComponent,
+    UsuariosListComponent,
+    UsuariosFormComponent,
   ],
 })
 export class PagesModule {}
