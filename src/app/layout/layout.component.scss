@@ -7,30 +7,55 @@
 }
 
 .sidenav-container {
-  height: 100vh;
+    height: 100vh;
 }
 
 .sidenav {
-  width: 220px;
+    width: 200px;
 }
 
 .menu-button {
-  margin-right: 12px;
+    margin-right: 12px;
 }
 
 mat-toolbar {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .toolbar {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .app-title {
-  font-weight: bold;
-  font-size: 18px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.sidenav-content-flex {
+    display: flex;
+    /* Ativa o Flexbox */
+    flex-direction: column;
+    /* Itens empilhados verticalmente */
+    /* Define a altura para ocupar todo o espaço disponível
+     Subtraímos 64px que é a altura padrão do mat-toolbar */
+    height: calc(100% - 64px);
+}
+
+.flex-grow-list {
+    flex-grow: 1;
+    overflow-y: auto;
+    /* Adiciona scroll se a lista principal for muito longa */
+}
+
+.icon {
+    margin-right: 12px;
+    vertical-align: middle;
+}
+
+.text {
+    vertical-align: middle;
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Usuario } from 'src/app/shared/models/usuario.model';
@@ -19,8 +20,9 @@ export class UsuariosFormComponent implements OnInit {
     private fb: FormBuilder,
     private usuarioService: UsuarioService,
     private route: ActivatedRoute,
-    private router: Router
-  ) {}
+    private router: Router,
+    private snackbar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -58,9 +60,23 @@ export class UsuariosFormComponent implements OnInit {
       : this.usuarioService.cadastrarUsuario(usuario);
 
     operacao.subscribe({
-      next: () => this.router.navigate(['/usuarios']),
-      error: (err) => console.error('Erro ao salvar usuário', err),
-      complete: () => (this.carregando = false),
+      next: () => {
+        this.snackbar.open('Usuário salvo com sucesso!', 'Fechar', {
+          duration: 3000,
+        });
+        this.router.navigate(['/usuarios']);
+      },
+      error: (err) => {
+        console.error('Erro ao salvar usuário:', err);
+        const mensagem = err?.error?.message || err.message || 'Erro desconhecido.';
+        this.snackbar.open('Erro ao salvar usuário: ' + mensagem, 'Fechar', {
+          duration: 5000,
+        });
+        this.carregando = false;
+      },
+      complete: () => {
+        this.carregando = false;
+      },
     });
   }
 }

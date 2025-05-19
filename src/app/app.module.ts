@@ -12,7 +12,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
 import { AuthModule } from './auth/auth.module';
 import { PagesModule } from './pages/pages.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
@@ -20,6 +20,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
+import { AuthInterceptor } from './core/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent, LayoutComponent],
@@ -43,7 +44,13 @@ import { MatIconModule } from '@angular/material/icon';
     MatListModule,
     MatIconModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
