@@ -42,7 +42,7 @@ export class UsuariosListComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    // Atribui o paginador e o sort ao dataSource
+    // Atribui o paginator e ordenação ao dataSource
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -51,7 +51,6 @@ export class UsuariosListComponent implements OnInit {
     this.usuarioService.buscarUsuarios().subscribe({
       next: (usuarios) => {
         this.dataSource.data = usuarios;
-        // this.dataSource.paginator = this.paginator;
       },
       error: (err) => {
         console.error('Erro ao carregar usuários:', err);
