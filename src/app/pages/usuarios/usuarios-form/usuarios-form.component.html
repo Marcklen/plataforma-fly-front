@@ -19,17 +19,21 @@
 
             <mat-form-field appearance="fill" class="full-width">
                 <mat-label>Senha</mat-label>
-                <input matInput formControlName="password" [required]="!isEdit" type="password" />
+                <input matInput type="password" formControlName="password" [placeholder]="isEdit ? 'Deixe em branco para manter a atual' : ''" [required]="!isEdit" autocomplete="new-password" />
             </mat-form-field>
 
-            <mat-checkbox formControlName="admin">Administrador</mat-checkbox>
+            <div *ngIf="authService.isAdmin()" class="admin-checkbox">
+                <mat-checkbox formControlName="admin">Administrador</mat-checkbox>
+            </div>
 
             <div class="actions">
-                <button mat-raised-button color="accent" type="button" (click)="cancelar()">Cancelar</button>
+                <button mat-raised-button color="accent" type="button" (click)="cancelar()">
+          Cancelar
+        </button>
                 <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || carregando">
-              <span *ngIf="!carregando">Salvar</span>
-              <mat-spinner *ngIf="carregando" diameter="20"></mat-spinner>
-                </button>
+          <span *ngIf="!carregando">Salvar</span>
+          <mat-spinner *ngIf="carregando" diameter="20"></mat-spinner>
+        </button>
             </div>
         </form>
     </mat-card-content>

@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Usuario } from 'src/app/shared/models/usuario.model';
+import { AuthService } from 'src/app/core/auth.service';
 
 @Component({
   selector: 'app-usuarios-form',
@@ -22,7 +23,8 @@ export class UsuariosFormComponent implements OnInit {
     private usuarioService: UsuarioService,
     private route: ActivatedRoute,
     private router: Router,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    public authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -41,7 +43,10 @@ export class UsuariosFormComponent implements OnInit {
       this.usuarioService
         .buscarUsuarioPorId(this.userId)
         .subscribe((usuario) => {
-          this.form.patchValue(usuario);
+          // prencher campos do form com os dados do usuario SEM A SENHA
+          const { password, ...usuarioSemSenha } = usuario;
+          this.form.patchValue(usuarioSemSenha);
+          // Senha será opcional na edição caso o usuário seja do TIPO ADMIN
           this.form.get('password')?.clearValidators();
           this.form.get('password')?.updateValueAndValidity();
         });
@@ -56,6 +61,21 @@ export class UsuariosFormComponent implements OnInit {
     this.carregando = true;
     const usuario: Usuario = this.form.value;
 
+    // Lógica para restringir alteração de SENHA conforme regra de NEGOCIO somente ADMIN poderá alterar a senha
+    if (this.isEdit) {
+      if (!usuario.password) {
+        delete usuario.password; // Remove a senha se não for fornecida
+      } else if (!this.authService.isAdmin()) {
+        this.snackbar.open('Somente administradores podem alterar a senha.', 'Fechar', {
+          duration: 4000,
+          verticalPosition: 'top',
+          panelClass: ['feedback-alerta'],
+        });
+        this.carregando = false;
+        return;
+      }
+    }
+
     const operacao = this.isEdit
       ? this.usuarioService.atualizarUsuario(this.userId, usuario)
       : this.usuarioService.cadastrarUsuario(usuario);
@@ -63,7 +83,9 @@ export class UsuariosFormComponent implements OnInit {
     operacao.subscribe({
       next: () => {
         this.snackbar.open('Usuário salvo com sucesso!', 'Fechar', {
-          duration: 3000,
+          duration: 4000,
+          verticalPosition: 'top',
+          panelClass: ['feedback-sucesso'],
         });
         this.router.navigate(['/usuarios']);
       },
@@ -71,7 +93,9 @@ export class UsuariosFormComponent implements OnInit {
         console.error('Erro ao salvar usuário:', err);
         const mensagem = err?.error?.message || err.message || 'Erro desconhecido.';
         this.snackbar.open('Erro ao salvar usuário: ' + mensagem, 'Fechar', {
-          duration: 5000,
+          duration: 4000,
+          verticalPosition: 'top',
+          panelClass: ['feedback-erro'],
         });
         this.carregando = false;
       },
