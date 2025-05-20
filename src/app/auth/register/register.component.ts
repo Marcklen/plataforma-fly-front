@@ -32,18 +32,18 @@ export class RegisterComponent {
       this.usuarioService.cadastrarUsuario(this.form.value).subscribe({
         next: () => {
           this.snackBar.open('Usuário cadastrado com sucesso!', 'Fechar', {
-            duration: 3000,
-            panelClass: ['feedback-sucesso'],
-            verticalPosition: 'top'
+            duration: 4000,
+            verticalPosition: 'top',
+            panelClass: ['custom-snackbar-success']
           });
           this.form.reset();
-          setTimeout(() => this.router.navigate(['/login']), 3000);
+          setTimeout(() => this.router.navigate(['/login']), 4000);
         },
         error: () => {
           this.snackBar.open('Erro ao cadastrar usuário. Tente novamente.', 'Fechar', {
-            duration: 3000,
-            panelClass: ['feedback-erro'],
-            verticalPosition: 'top'
+            duration: 4000,
+            verticalPosition: 'top',
+            panelClass: ['custom-snackbar-error'],
           });
         }
       }).add(() => this.carregando = false);

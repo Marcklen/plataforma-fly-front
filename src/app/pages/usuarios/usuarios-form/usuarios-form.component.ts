@@ -69,7 +69,7 @@ export class UsuariosFormComponent implements OnInit {
         this.snackbar.open('Somente administradores podem alterar a senha.', 'Fechar', {
           duration: 4000,
           verticalPosition: 'top',
-          panelClass: ['feedback-alerta'],
+          panelClass: ['custom-snackbar-warn'],
         });
         this.carregando = false;
         return;
@@ -85,7 +85,7 @@ export class UsuariosFormComponent implements OnInit {
         this.snackbar.open('Usuário salvo com sucesso!', 'Fechar', {
           duration: 4000,
           verticalPosition: 'top',
-          panelClass: ['feedback-sucesso'],
+          panelClass: ['custom-snackbar-success'],
         });
         this.router.navigate(['/usuarios']);
       },
@@ -95,7 +95,7 @@ export class UsuariosFormComponent implements OnInit {
         this.snackbar.open('Erro ao salvar usuário: ' + mensagem, 'Fechar', {
           duration: 4000,
           verticalPosition: 'top',
-          panelClass: ['feedback-erro'],
+          panelClass: ['custom-snackbar-error'],
         });
         this.carregando = false;
       },

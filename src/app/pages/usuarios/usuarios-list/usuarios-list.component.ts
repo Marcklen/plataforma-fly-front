@@ -55,9 +55,9 @@ export class UsuariosListComponent implements OnInit {
       error: (err) => {
         console.error('Erro ao carregar usuários:', err);
         this.snackBar.open('Erro ao carregar usuários.', 'Fechar', {
-          duration: 3000,
-          panelClass: ['feedback-erro'],
+          duration: 4000,
           verticalPosition: 'top',
+          panelClass: ['custom-snackbar-error'],
         });
       },
     });
@@ -97,17 +97,17 @@ export class UsuariosListComponent implements OnInit {
         this.usuarioService.excluirUsuario(usuario.id!).subscribe({
           next: () => {
             this.snackBar.open('Usuário excluído com sucesso!', 'Fechar', {
-              duration: 3000,
-              panelClass: ['feedback-sucesso'],
+              duration: 4000,
               verticalPosition: 'top',
+              panelClass: ['custom-snackbar-success'],
             });
             this.carregarUsuarios();
           },
           error: () => {
             this.snackBar.open('Erro ao excluir o usuário.', 'Fechar', {
-              duration: 3000,
-              panelClass: ['feedback-erro'],
+              duration: 4000,
               verticalPosition: 'top',
+              panelClass: ['custom-snackbar-error'],
             });
           },
         });

@@ -2,22 +2,53 @@
    Estilos globais reutilizáveis
 ------------------------------- */
 
-.feedback-sucesso {
+
+/* Snackbars customizados */
+
+.custom-snackbar-success {
     background-color: #4caf50 !important;
-    color: white;
+    color: #fff !important;
     font-weight: bold;
 }
 
-.feedback-erro {
+.custom-snackbar-error {
     background-color: #f44336 !important;
-    color: white;
+    color: #fff !important;
     font-weight: bold;
 }
 
-.feedback-alerta {
+.custom-snackbar-warn {
     background-color: #ff9800 !important;
-    color: white;
+    color: #fff !important;
     font-weight: bold;
+}
+
+
+/* Botão dentro do snackbar */
+
+.custom-snackbar-success .mdc-button__label,
+.custom-snackbar-error .mdc-button__label,
+.custom-snackbar-warn .mdc-button__label {
+    color: #fff !important;
+}
+
+
+/* Container do snackbar */
+
+::ng-deep .mat-mdc-snack-bar-container {
+    margin-top: 80px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    font-weight: 500;
+}
+
+
+/* Auth visual */
+
+.auth-card {
+    max-width: 400px;
+    margin: 48px auto;
+    padding: 24px;
 }
 
 .auth-link {
@@ -33,16 +64,7 @@
 }
 
 
-/* Estilo padrão para auth cards */
-
-.auth-card {
-    max-width: 400px;
-    margin: 48px auto;
-    padding: 24px;
-}
-
-
-/* Para garantir largura total de campos */
+/* Comuns */
 
 .full-width {
     width: 100%;
@@ -57,23 +79,4 @@
 button mat-spinner {
     display: inline-block;
     vertical-align: middle;
-}
-
-
-/* Toast de sucesso e falhas */
-
-::ng-deep .mat-mdc-snack-bar-container {
-    margin-top: 80px;
-    border-radius: 8px;
-    font-weight: 500;
-}
-
-::ng-deep .mat-mdc-snack-bar-container.feedback-sucesso {
-    background-color: #4caf50;
-    color: white;
-}
-
-::ng-deep .mat-mdc-snack-bar-container.feedback-erro {
-    background-color: #f44336;
-    color: white;
 }

@@ -48,16 +48,16 @@ export class LoginComponent {
               this.router.navigate(['/home']); // ou para /not-found
             }
             this.snackBar.open('Login realizado com sucesso!', 'Fechar', {
-              duration: 3000,
-              panelClass: ['feedback-sucesso'],
+              duration: 4000,
               verticalPosition: 'top',
+              panelClass: ['custom-snackbar-success'],
             });
           },
           error: () => {
             this.snackBar.open('Credenciais inválidas!', 'Fechar', {
-              duration: 3000,
-              panelClass: ['feedback-erro'],
+              duration: 4000,
               verticalPosition: 'top',
+              panelClass: ['custom-snackbar-error'],
             });
           },
         })
