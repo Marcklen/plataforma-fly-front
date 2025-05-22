@@ -18,15 +18,17 @@
                     </a>
                 </ng-container>
 
-                <a mat-list-item routerLink="/home">
-                    <mat-icon matListIcon class="icon">home</mat-icon>
-                    <span class="text">Início</span>
-                </a>
-
                 <ng-container *ngIf="authService.isAuthenticated()">
                     <a mat-list-item routerLink="/usuarios">
                         <mat-icon matListIcon class="icon">group</mat-icon>
                         <span class="text">Usuários</span>
+                    </a>
+                </ng-container>
+
+                <ng-container *ngIf="authService.isAuthenticated()">
+                    <a mat-list-item routerLink="/email">
+                        <mat-icon matListIcon class="icon">email</mat-icon>
+                        <span class="text">E-mail</span>
                     </a>
                 </ng-container>
             </mat-nav-list>
@@ -48,7 +50,7 @@
 
             <span class="app-title">Plataforma Fly</span>
             <span class="spacer"></span>
-            <span *ngIf="username">Olá, {{ username }}!</span>
+            <span *ngIf="username">Olá, {{ username.charAt(0).toUpperCase() + username.slice(1) }}!</span>
         </mat-toolbar>
 
         <div class="content">
