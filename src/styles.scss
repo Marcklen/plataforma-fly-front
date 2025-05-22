@@ -5,41 +5,30 @@
 
 /* Snackbars customizados */
 
-.custom-snackbar-success {
-    background-color: #4caf50 !important;
-    color: #fff !important;
+.mat-mdc-snack-bar-container.custom-snackbar-success {
+    --mdc-snackbar-container-color: #4caf50 !important;
+    color: white !important;
     font-weight: bold;
 }
 
-.custom-snackbar-error {
-    background-color: #f44336 !important;
-    color: #fff !important;
+.mat-mdc-snack-bar-container.custom-snackbar-error {
+    --mdc-snackbar-container-color: #f44336 !important;
+    color: white !important;
     font-weight: bold;
 }
 
-.custom-snackbar-warn {
-    background-color: #ff9800 !important;
-    color: #fff !important;
+.mat-mdc-snack-bar-container.custom-snackbar-warn {
+    --mdc-snackbar-container-color: #ff9800 !important;
+    color: white !important;
     font-weight: bold;
 }
 
 
-/* Botão dentro do snackbar */
+/* Estilo do botão “Fechar” dentro do snackbar */
 
-.custom-snackbar-success .mdc-button__label,
-.custom-snackbar-error .mdc-button__label,
-.custom-snackbar-warn .mdc-button__label {
-    color: #fff !important;
-}
-
-
-/* Container do snackbar */
-
-::ng-deep .mat-mdc-snack-bar-container {
-    margin-top: 80px;
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    font-weight: 500;
+.mat-mdc-snack-bar-container .mdc-button__label {
+    color: white !important;
+    font-weight: bold;
 }
 
 
@@ -71,9 +60,11 @@
 }
 
 .actions {
-    margin-top: 16px;
+    margin-top: 24px;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
 }
 
 button mat-spinner {
