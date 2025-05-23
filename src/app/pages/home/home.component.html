@@ -1,6 +1,15 @@
-<mat-card>
-  <mat-card-title>Bem-vindo, {{ username }}!</mat-card-title>
-  <mat-card-content>
-    <p>Você está logado com sucesso na aplicação Plataforma Fly.</p>
-  </mat-card-content>
-</mat-card>
+<div class="home-container">
+    <mat-card class="home-card">
+        <mat-card-header>
+            <mat-card-title>Bem-vindo à Plataforma Fly</mat-card-title>
+            <mat-card-subtitle>Sua experiência começa aqui</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <p>Acesse funcionalidades exclusivas com sua conta ou registre-se gratuitamente.</p>
+        </mat-card-content>
+        <mat-card-actions class="home-actions">
+            <button mat-flat-button color="primary" routerLink="/login">Entrar</button>
+            <button mat-flat-button color="accent" routerLink="/register">Cadastrar-se</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

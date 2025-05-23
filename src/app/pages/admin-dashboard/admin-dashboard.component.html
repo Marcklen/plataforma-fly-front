@@ -1,7 +1,36 @@
-<mat-card class="dashboard-card">
-  <mat-card-title>Painel do Administrador</mat-card-title>
-  <mat-card-content>
-    <p>Bem-vindo ao painel administrativo da Plataforma Fly!</p>
-    <p>Aqui você pode gerenciar usuários, permissões e enviar emails para os demais usuários do sistema.</p>
-  </mat-card-content>
-</mat-card>
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h2>Dashboard Administrativo</h2>
+        <p>Resumo geral da plataforma</p>
+    </div>
+
+    <div class="dashboard-cards">
+        <div class="dashboard-card blue">
+            <p>Total Admins</p>
+            <h3>{{ totalUsuariosAdmin }}</h3>
+        </div>
+        <div class="dashboard-card light-blue">
+            <p>Usuários Comuns</p>
+            <h3>{{ totalUsuariosComuns }}</h3>
+        </div>
+        <div class="dashboard-card purple">
+            <p>E-mails Enviados</p>
+            <h3>{{ emailsEnviados }}</h3>
+        </div>
+        <div class="dashboard-card green">
+            <p>E-mails Pendentes</p>
+            <h3>{{ emailsPendentes }}</h3>
+        </div>
+    </div>
+
+    <div class="chart-section">
+        <div class="chart chart-line">
+            <!-- Placeholder para componente de gráfico de linha -->
+            <app-grafico-usuarios></app-grafico-usuarios>
+        </div>
+        <div class="chart chart-pie">
+            <!-- Placeholder para componente de gráfico de pizza -->
+            <app-grafico-emails></app-grafico-emails>
+        </div>
+    </div>
+</div>
