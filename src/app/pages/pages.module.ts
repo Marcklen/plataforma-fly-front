@@ -20,6 +20,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DataHoraFormatadaPipe } from '../shared/pipes/data-hora-formatada.pipe';
+import { GraficoUsuariosComponent } from './admin-dashboard/charts/grafico-usuarios/grafico-usuarios.component';
+import { GraficoEmailsComponent } from './admin-dashboard/charts/grafico-emails/grafico-emails.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,9 @@ import { DataHoraFormatadaPipe } from '../shared/pipes/data-hora-formatada.pipe'
     UsuarioDashboardComponent,
     UsuariosListComponent,
     UsuariosFormComponent,
-    DataHoraFormatadaPipe
+    DataHoraFormatadaPipe,
+    GraficoUsuariosComponent,
+    GraficoEmailsComponent,
   ],
   imports: [
     CommonModule,
@@ -46,6 +51,7 @@ import { DataHoraFormatadaPipe } from '../shared/pipes/data-hora-formatada.pipe'
     ReactiveFormsModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
+    NgChartsModule,
   ],
   exports: [
     NotFoundComponent,

@@ -45,14 +45,14 @@ import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confi
     MatSidenavModule,
     MatListModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
-    }
+    },
   ],
   bootstrap: [AppComponent],
 })
