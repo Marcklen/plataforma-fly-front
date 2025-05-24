@@ -32,6 +32,11 @@ export class GraficoEmailsComponent {
         },
       },
       tooltip: {
+        backgroundColor: '#f5f5f5',
+        titleColor: '#000',
+        bodyColor: '#333',
+        borderColor: '#ccc',
+        borderWidth: 1,
         callbacks: {
           label: (context) => {
             const label = context.label || '';

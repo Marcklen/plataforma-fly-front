@@ -6,25 +6,30 @@ import { Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 interface JwtPayload {
-
   sub: string; // Nome do usuário
   roles: string[]; // Papéis do usuário
   exp: number; // Data de expiração do token
-
+  //para buscar dados do usuário
+  nome?: string;
+  login?: string;
+  admin?: boolean;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   private apiUrl = `${environment.apiBaseUrl}/auth/login`; // URL de autenticação da API atraves do Gateway
   private tokenKey = 'auth_token'; // Chave para armazenar o token no localStorage
+  private usuarioApiUrl = `${environment.apiBaseUrl}/usuario`; // URL da API de usuários
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {}
 
   // Método para fazer login (refatorado)
-  login(credentials: { login: string; password: string }): Observable<{ token: string }> {
+  login(credentials: {
+    login: string;
+    password: string;
+  }): Observable<{ token: string }> {
     return this.http.post<{ token: string }>(this.apiUrl, credentials);
   }
 
@@ -69,6 +74,18 @@ export class AuthService {
   isAdmin(): boolean {
     return this.getRoles().includes('ROLE_ADMIN');
   }
+
+  // Método para buscar o token decodificado
+  getDecodedToken(): JwtPayload | null {
+    return this.decodeToken();
+  }
+
+  // Método para buscar os dados do usuário por login
+  getDadosUsuario(): Observable<any> {
+    const login = this.getUsername();
+    return this.http.get<any>(`${this.usuarioApiUrl}/login/${login}`);
+  }
+
   // Método para verificar se o token está expirado
   private isTokenExpired(token: string): boolean {
     try {

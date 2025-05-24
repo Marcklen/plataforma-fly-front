@@ -22,6 +22,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DataHoraFormatadaPipe } from '../shared/pipes/data-hora-formatada.pipe';
 import { GraficoUsuariosComponent } from './admin-dashboard/charts/grafico-usuarios/grafico-usuarios.component';
 import { GraficoEmailsComponent } from './admin-dashboard/charts/grafico-emails/grafico-emails.component';
+import { GraficoEmailsUsuarioComponent } from './usuario-dashboard/charts/grafico-emails/grafico-emails.component';
 import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
@@ -35,6 +36,7 @@ import { NgChartsModule } from 'ng2-charts';
     DataHoraFormatadaPipe,
     GraficoUsuariosComponent,
     GraficoEmailsComponent,
+    GraficoEmailsUsuarioComponent,
   ],
   imports: [
     CommonModule,
