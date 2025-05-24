@@ -11,7 +11,8 @@ export class GraficoEmailsComponent {
     labels: ['Enviados', 'Pendentes'],
     datasets: [
       {
-        data: [120, 45],
+        data: [60, 10],
+        label: 'Emails',
         backgroundColor: ['#66bb6a', '#ffa726'],
       },
     ],
@@ -19,6 +20,27 @@ export class GraficoEmailsComponent {
 
   public pieChartOptions: ChartConfiguration<'pie'>['options'] = {
     responsive: true,
+    maintainAspectRatio: false, // evita overflow
+    plugins: {
+      legend: {
+        position: 'top',
+        labels: {
+          color: '#333',
+          font: {
+            size: 13,
+          },
+        },
+      },
+      tooltip: {
+        callbacks: {
+          label: (context) => {
+            const label = context.label || '';
+            const value = context.raw || 0;
+            return `${label}: ${value} e-mails`;
+          },
+        },
+      },
+    },
   };
 
   public pieChartType: ChartType = 'pie';
