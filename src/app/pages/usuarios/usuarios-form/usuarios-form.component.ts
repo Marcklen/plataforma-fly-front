@@ -12,7 +12,6 @@ import { AuthService } from 'src/app/core/auth.service';
   styleUrls: ['./usuarios-form.component.scss'],
 })
 export class UsuariosFormComponent implements OnInit {
-
   form!: FormGroup;
   isEdit = false;
   carregando = false;
@@ -25,7 +24,7 @@ export class UsuariosFormComponent implements OnInit {
     private router: Router,
     private snackbar: MatSnackBar,
     public authService: AuthService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -37,21 +36,34 @@ export class UsuariosFormComponent implements OnInit {
     });
 
     const id = this.route.snapshot.paramMap.get('id');
+    const isAdmin = this.authService.isAdmin();
+
     if (id) {
       this.isEdit = true;
       this.userId = +id;
+
       this.usuarioService
         .buscarUsuarioPorId(this.userId)
         .subscribe((usuario) => {
           // prencher campos do form com os dados do usuario SEM A SENHA
           const { password, ...usuarioSemSenha } = usuario;
           this.form.patchValue(usuarioSemSenha);
+          // Oculta o campo de login da validação se o usuário não for admin
+          if (!isAdmin) {
+            this.form.get('login')?.clearValidators();
+            this.form.get('login')?.updateValueAndValidity();
+          }
           // Senha será opcional na edição caso o usuário seja do TIPO ADMIN
           this.form.get('password')?.clearValidators();
           this.form.get('password')?.updateValueAndValidity();
         });
     } else {
       this.form.get('password')?.setValidators(Validators.required);
+    }
+    // Se não for admin e está editando, não exibe o campo de login
+    if (this.isEdit && !isAdmin) {
+      this.form.get('login')?.clearValidators();
+      this.form.get('login')?.updateValueAndValidity();
     }
   }
 
@@ -66,11 +78,15 @@ export class UsuariosFormComponent implements OnInit {
       if (!usuario.password) {
         delete usuario.password; // Remove a senha se não for fornecida
       } else if (!this.authService.isAdmin()) {
-        this.snackbar.open('Somente administradores podem alterar a senha.', 'Fechar', {
-          duration: 4000,
-          verticalPosition: 'top',
-          panelClass: ['custom-snackbar-warn'],
-        });
+        this.snackbar.open(
+          'Somente administradores podem alterar a senha.',
+          'Fechar',
+          {
+            duration: 4000,
+            verticalPosition: 'top',
+            panelClass: ['custom-snackbar-warn'],
+          }
+        );
         this.carregando = false;
         return;
       }
@@ -90,8 +106,13 @@ export class UsuariosFormComponent implements OnInit {
         this.router.navigate(['/usuarios']);
       },
       error: (err) => {
-        console.error('Erro ao salvar usuário:', err);
-        const mensagem = err?.error?.message || err.message || 'Erro desconhecido.';
+        const mensagem =
+          err?.error?.message ||
+          (Array.isArray(err?.error?.errors)
+            ? err.error.errors.join(', ')
+            : null) ||
+          err.message ||
+          'Erro desconhecido.';
         this.snackbar.open('Erro ao salvar usuário: ' + mensagem, 'Fechar', {
           duration: 4000,
           verticalPosition: 'top',
@@ -108,5 +129,4 @@ export class UsuariosFormComponent implements OnInit {
   cancelar() {
     this.router.navigate(['/usuarios']);
   }
-  
 }
