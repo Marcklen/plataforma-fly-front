@@ -1,3 +1,7 @@
+<div class="voltar-wrapper">
+  <button mat-raised-button color="primary" routerLink="/email">← Voltar</button>
+</div>
+
 <mat-card class="email-detalhe-card">
   <mat-card-title>Detalhes do E-mail</mat-card-title>
   <mat-card-content>
@@ -7,12 +11,13 @@
       <p><strong>Status:</strong>
         <span [ngClass]="{
           'status-enviado': email?.enviado === true,
-          'status-nao-enviado': email?.enviado === false,
+          'status-nao-enviado': email?.enviado === false
         }">
           {{ email?.enviado ? 'Enviado' : 'Pendente' }}
         </span>
       </p>
       <p *ngIf="email?.dataEnvio"><strong>Data de Envio:</strong> {{ email?.dataEnvio | date:'dd/MM/yyyy HH:mm' }}</p>
+      <p><strong>Data de Criação:</strong> {{ email?.dataCriacao | date:'dd/MM/yyyy HH:mm' }}</p>
     </div>
 
     <div class="email-body">
@@ -20,8 +25,4 @@
       <p>{{ email?.corpo }}</p>
     </div>
   </mat-card-content>
-
-  <mat-card-actions>
-    <button mat-raised-button color="primary" routerLink="/email">Voltar</button>
-  </mat-card-actions>
 </mat-card>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/auth.service';
 import { EmailService } from 'src/app/services/email.service';
 import { Email } from 'src/app/shared/models/email.model';
 
@@ -9,59 +11,35 @@ import { Email } from 'src/app/shared/models/email.model';
 })
 export class EmailsListComponent implements OnInit {
   emails: Email[] = [];
-  displayedColumns: string[] = ['destinatario', 'assunto', 'status', 'acoes'];
   carregando = false;
 
-  // constructor(private emailService: EmailService) {}
+  constructor(
+    private emailService: EmailService,
+    private router: Router,
+    public authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-    // this.carregarEmails();
-    this.carregarMockEmails();
-  }
-  carregarMockEmails() {
-    throw new Error('Method not implemented.');
+    this.carregarEmails();
   }
 
-  carregarMock(): void {
+  carregarEmails(): void {
     this.carregando = true;
-    setTimeout(() => {
-      this.emails = [
-        {
-          id: 1,
-          destinatario: 'usuario@teste.com',
-          assunto: 'Bem-vindo!',
-          corpo: 'Obrigado por se cadastrar!',
-          enviado: true,
-          dataEnvio: new Date().toISOString(),
-          dataCriacao: '',
-        },
-        {
-          id: 2,
-          destinatario: 'admin@teste.com',
-          assunto: 'Atualização do sistema',
-          corpo: 'O sistema será atualizado às 22h.',
-          enviado: false,
-          dataEnvio: undefined,
-          dataCriacao: '',
-        },
-      ];
-      this.carregando = false;
-    }, 1000);
+
+    this.emailService.listar().subscribe({
+      next: (dados) => {
+        this.emails = dados;
+      },
+      error: (erro) => {
+        console.error('Erro ao carregar e-mails:', erro);
+      },
+      complete: () => {
+        this.carregando = false;
+      },
+    });
   }
 
-  // carregarEmails(): void {
-  //   this.carregando = true;
-
-  //   this.emailService.listar().subscribe({
-  //     next: (dados) => {
-  //       this.emails = dados;
-  //     },
-  //     error: (erro) => {
-  //       console.error('Erro ao carregar e-mails:', erro);
-  //     },
-  //     complete: () => {
-  //       this.carregando = false;
-  //     },
-  //   });
-  // }
+  visualizar(email: Email): void {
+    this.router.navigate(['/email', email.id]);
+  }
 }

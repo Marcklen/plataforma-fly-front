@@ -1,49 +1,64 @@
-<mat-card>
-  <div class="email-header">
-    <h2>Lista de E-mails Enviados</h2>
-    <button mat-raised-button color="primary" routerLink="/email/novo">
-      Novo E-mail
-    </button>
-  </div>
+<mat-card class="emails-list-card">
+  <!-- Verificação de permissão (ADMIN) -->
+  <ng-container *ngIf="authService.getRoles().includes('ROLE_ADMIN')">
+    <div class="emails-header">
+      <h2>Lista de E-mails Enviados</h2>
+      <button mat-raised-button color="primary" routerLink="/email/novo">
+        Novo E-mail
+      </button>
+    </div>
 
-  <mat-divider></mat-divider>
+    <div *ngIf="carregando" class="carregando">
+      Carregando e-mails...
+    </div>
 
-  <div *ngIf="emails.length > 0; else semEmails">
-    <mat-table [dataSource]="emails" class="mat-elevation-z1">
+    <table *ngIf="!carregando && emails.length > 0" mat-table [dataSource]="emails" class="mat-elevation-z2">
       <!-- Destinatário -->
       <ng-container matColumnDef="destinatario">
-        <mat-header-cell *matHeaderCellDef>Destinatário</mat-header-cell>
-        <mat-cell *matCellDef="let email">{{ email.destinatario }}</mat-cell>
+        <th mat-header-cell *matHeaderCellDef>Destinatário</th>
+        <td mat-cell *matCellDef="let email">{{ email.destinatario }}</td>
       </ng-container>
 
       <!-- Assunto -->
       <ng-container matColumnDef="assunto">
-        <mat-header-cell *matHeaderCellDef>Assunto</mat-header-cell>
-        <mat-cell *matCellDef="let email">{{ email.assunto }}</mat-cell>
+        <th mat-header-cell *matHeaderCellDef>Assunto</th>
+        <td mat-cell *matCellDef="let email">{{ email.assunto }}</td>
       </ng-container>
 
       <!-- Status -->
       <ng-container matColumnDef="status">
-        <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
-        <mat-cell *matCellDef="let email">{{ email.status }}</mat-cell>
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let email">
+          <span [ngClass]="{
+            'status-enviado': email.enviado,
+            'status-nao-enviado': !email.enviado
+          }">
+            {{ email.enviado ? 'Enviado' : 'Pendente' }}
+          </span>
+        </td>
       </ng-container>
 
       <!-- Ações -->
       <ng-container matColumnDef="acoes">
-        <mat-header-cell *matHeaderCellDef>Ações</mat-header-cell>
-        <mat-cell *matCellDef="let email">
-          <button mat-icon-button color="accent" [routerLink]="['/email', email.id]">
-            <mat-icon>visibility</mat-icon>
-          </button>
-        </mat-cell>
+        <th mat-header-cell *matHeaderCellDef>Ações</th>
+        <td mat-cell *matCellDef="let email">
+          <button mat-button color="primary" (click)="visualizar(email)">Visualizar</button>
+        </td>
       </ng-container>
 
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
-  </div>
+      <tr mat-header-row *matHeaderRowDef="['destinatario', 'assunto', 'status', 'acoes']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['destinatario', 'assunto', 'status', 'acoes'];"></tr>
+    </table>
 
-  <ng-template #semEmails>
-    <p class="vazio">Nenhum e-mail encontrado.</p>
-  </ng-template>
+    <div *ngIf="!carregando && emails.length === 0" class="sem-registro">
+      <p><i>Nenhum e-mail encontrado.</i></p>
+    </div>
+  </ng-container>
+
+  <!-- Mensagem para usuários não ADMIN -->
+  <ng-container *ngIf="!authService.getRoles().includes('ROLE_ADMIN')">
+    <p class="mensagem-negada">
+      Acesso restrito! Apenas administradores podem visualizar os e-mails enviados.
+    </p>
+  </ng-container>
 </mat-card>

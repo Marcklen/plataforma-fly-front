@@ -22,4 +22,12 @@ export class EmailService {
   notificarTodosAdmins(mensagem: EmailMessageDTO): Observable<any> {
     return this.http.post(`${this.apiUrl}/notificar/admins`, mensagem);
   }
+
+  buscarPorId(id: number): Observable<Email> {
+    return this.http.get<Email>(`${this.apiUrl}/email/${id}`);
+  }
+
+  listar(): Observable<Email[]> {
+    return this.http.get<Email[]>(`${this.apiUrl}/email`);
+  }
 }

@@ -1,51 +1,50 @@
 .emails-list-card {
-  margin: 24px auto;
-  padding: 16px;
-  max-width: 900px;
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 32px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-table {
-  width: 100%;
-}
-
-.badge-sucesso {
-  background-color: #4caf50;
-  color: white;
-  font-weight: bold;
-  padding: 4px 8px;
-  border-radius: 12px;
-}
-
-.badge-pendente {
-  background-color: #ff9800;
-  color: white;
-  font-weight: bold;
-  padding: 4px 8px;
-  border-radius: 12px;
-}
-
-.no-emails {
-  text-align: center;
-  margin-top: 20px;
-  font-weight: bold;
-  color: #757575;
-}
-
-.email-list-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.email-header {
+.emails-header {
+  margin: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
-.vazio {
+.sem-registro,
+.carregando {
   text-align: center;
-  margin-top: 32px;
-  color: gray;
-  font-weight: 500;
+  margin-top: 24px;
+  font-style: italic;
+}
+
+.status-enviado {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.status-nao-enviado {
+  color: #f44336;
+  font-weight: bold;
+}
+
+.mensagem-negada {
+  padding: 24px;
+  color: #f44336;
+  background-color: #f8d7da;
+  text-align: center;
+  padding: 20px;
+  font-weight: bold;
+  font-size: 1.2em;
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+  margin: 24px auto;
+}
+
+button[color='primary'] {
+  font-weight: 600;
 }
