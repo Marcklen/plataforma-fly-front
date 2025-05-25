@@ -1,0 +1,51 @@
+.emails-list-card {
+  margin: 24px auto;
+  padding: 16px;
+  max-width: 900px;
+}
+
+table {
+  width: 100%;
+}
+
+.badge-sucesso {
+  background-color: #4caf50;
+  color: white;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 12px;
+}
+
+.badge-pendente {
+  background-color: #ff9800;
+  color: white;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 12px;
+}
+
+.no-emails {
+  text-align: center;
+  margin-top: 20px;
+  font-weight: bold;
+  color: #757575;
+}
+
+.email-list-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.email-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.vazio {
+  text-align: center;
+  margin-top: 32px;
+  color: gray;
+  font-weight: 500;
+}

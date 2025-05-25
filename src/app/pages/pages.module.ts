@@ -24,6 +24,9 @@ import { GraficoUsuariosComponent } from './admin-dashboard/charts/grafico-usuar
 import { GraficoEmailsComponent } from './admin-dashboard/charts/grafico-emails/grafico-emails.component';
 import { GraficoEmailsUsuarioComponent } from './usuario-dashboard/charts/grafico-emails/grafico-emails.component';
 import { NgChartsModule } from 'ng2-charts';
+import { EmailsListComponent } from './emails/emails-list/emails-list.component';
+import { EmailsFormComponent } from './emails/emails-form/emails-form.component';
+import { EmailsDetalheComponent } from './emails/emails-detalhe/emails-detalhe.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,9 @@ import { NgChartsModule } from 'ng2-charts';
     GraficoUsuariosComponent,
     GraficoEmailsComponent,
     GraficoEmailsUsuarioComponent,
+    EmailsListComponent,
+    EmailsFormComponent,
+    EmailsDetalheComponent,
   ],
   imports: [
     CommonModule,

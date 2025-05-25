@@ -1,0 +1,27 @@
+<mat-card class="email-detalhe-card">
+  <mat-card-title>Detalhes do E-mail</mat-card-title>
+  <mat-card-content>
+    <div class="email-info">
+      <p><strong>Destinatário:</strong> {{ email?.destinatario }}</p>
+      <p><strong>Assunto:</strong> {{ email?.assunto }}</p>
+      <p><strong>Status:</strong>
+        <span [ngClass]="{
+          'status-enviado': email?.enviado === true,
+          'status-nao-enviado': email?.enviado === false,
+        }">
+          {{ email?.enviado ? 'Enviado' : 'Pendente' }}
+        </span>
+      </p>
+      <p *ngIf="email?.dataEnvio"><strong>Data de Envio:</strong> {{ email?.dataEnvio | date:'dd/MM/yyyy HH:mm' }}</p>
+    </div>
+
+    <div class="email-body">
+      <h4>Mensagem:</h4>
+      <p>{{ email?.corpo }}</p>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary" routerLink="/email">Voltar</button>
+  </mat-card-actions>
+</mat-card>

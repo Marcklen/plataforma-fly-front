@@ -1,0 +1,30 @@
+.email-detalhe-card {
+  max-width: 700px;
+  margin: 32px auto;
+  padding: 24px;
+}
+
+.email-info p {
+  margin: 8px 0;
+}
+
+.email-body {
+  margin-top: 24px;
+  background-color: #f5f5f5;
+  padding: 16px;
+  border-radius: 4px;
+}
+
+.status-enviado {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.status-pendente {
+  color: #ff9800;
+  font-weight: bold;
+}
+.status-falha {
+  color: #f44336;
+  font-weight: bold;
+}

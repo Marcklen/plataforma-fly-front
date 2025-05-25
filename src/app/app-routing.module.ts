@@ -11,6 +11,9 @@ import { UsuarioDashboardComponent } from './pages/usuario-dashboard/usuario-das
 import { RoleGuard } from './core/role.guard';
 import { UsuariosListComponent } from './pages/usuarios/usuarios-list/usuarios-list.component';
 import { UsuariosFormComponent } from './pages/usuarios/usuarios-form/usuarios-form.component';
+import { EmailsListComponent } from './pages/emails/emails-list/emails-list.component';
+import { EmailsFormComponent } from './pages/emails/emails-form/emails-form.component';
+import { EmailsDetalheComponent } from './pages/emails/emails-detalhe/emails-detalhe.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -53,6 +56,9 @@ const routes: Routes = [
         canActivate: [RoleGuard],
         data: { roles: ['ROLE_ADMIN', 'ROLE_USER'] },
       },
+      { path: 'email', component: EmailsListComponent },
+      { path: 'email/novo', component: EmailsFormComponent },
+      { path: 'email/:id', component: EmailsDetalheComponent },
     ],
   },
   { path: '**', component: NotFoundComponent }, // Rota para página não encontrada

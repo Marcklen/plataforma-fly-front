@@ -1,0 +1,32 @@
+<button mat-raised-button color="primary" routerLink="/email">
+  ← Voltar
+</button>
+
+<mat-card>
+  <mat-card-title>Enviar Notificação</mat-card-title>
+  <mat-card-content [formGroup]="form">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Assunto</mat-label>
+      <input matInput formControlName="assunto" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Corpo do E-mail</mat-label>
+      <textarea matInput formControlName="corpo" rows="5" required></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Usuário Destinatário (ID)</mat-label>
+      <input matInput type="number" formControlName="usuarioId" />
+    </mat-form-field>
+
+    <div class="actions">
+      <button mat-raised-button color="primary" (click)="enviarParaUsuario()" [disabled]="form.invalid || loading">
+        Enviar para Usuário
+      </button>
+      <button mat-raised-button color="accent" (click)="enviarParaAdmins()" [disabled]="form.invalid || loading">
+        Enviar para Admins
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,49 @@
+<mat-card>
+  <div class="email-header">
+    <h2>Lista de E-mails Enviados</h2>
+    <button mat-raised-button color="primary" routerLink="/email/novo">
+      Novo E-mail
+    </button>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div *ngIf="emails.length > 0; else semEmails">
+    <mat-table [dataSource]="emails" class="mat-elevation-z1">
+      <!-- Destinatário -->
+      <ng-container matColumnDef="destinatario">
+        <mat-header-cell *matHeaderCellDef>Destinatário</mat-header-cell>
+        <mat-cell *matCellDef="let email">{{ email.destinatario }}</mat-cell>
+      </ng-container>
+
+      <!-- Assunto -->
+      <ng-container matColumnDef="assunto">
+        <mat-header-cell *matHeaderCellDef>Assunto</mat-header-cell>
+        <mat-cell *matCellDef="let email">{{ email.assunto }}</mat-cell>
+      </ng-container>
+
+      <!-- Status -->
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+        <mat-cell *matCellDef="let email">{{ email.status }}</mat-cell>
+      </ng-container>
+
+      <!-- Ações -->
+      <ng-container matColumnDef="acoes">
+        <mat-header-cell *matHeaderCellDef>Ações</mat-header-cell>
+        <mat-cell *matCellDef="let email">
+          <button mat-icon-button color="accent" [routerLink]="['/email', email.id]">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+
+  <ng-template #semEmails>
+    <p class="vazio">Nenhum e-mail encontrado.</p>
+  </ng-template>
+</mat-card>
