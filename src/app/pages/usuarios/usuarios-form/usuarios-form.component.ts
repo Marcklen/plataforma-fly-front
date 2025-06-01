@@ -71,29 +71,41 @@ export class UsuariosFormComponent implements OnInit {
     if (this.form.invalid) return;
 
     this.carregando = true;
-    const usuario: Usuario = this.form.value;
 
-    // Lógica para restringir alteração de SENHA conforme regra de NEGOCIO somente ADMIN poderá alterar a senha
-    if (this.isEdit) {
-      if (!usuario.password) {
-        delete usuario.password; // Remove a senha se não for fornecida
-      } else if (!this.authService.isAdmin()) {
-        this.snackbar.open(
-          'Somente administradores podem alterar a senha.',
-          'Fechar',
-          {
-            duration: 4000,
-            verticalPosition: 'top',
-            panelClass: ['custom-snackbar-warn'],
-          }
-        );
-        this.carregando = false;
-        return;
-      }
+    const usuario = this.form.value;
+    const isAdmin = this.authService.isAdmin();
+
+    // criado um novo objeto para evitar mutações diretas no form
+    // e para aplicar as regras de negócio de forma mais clara
+    const payload = { ...usuario };
+
+    // Regra 1: Se não for admin, não permite enviar o campo admin
+    if (!isAdmin) {
+      delete payload.admin;
+    }
+
+    // Regra 2: Senha só pode ser enviada se:
+    // - estiver preenchida
+    // - E o usuário for ADMIN
+    if (!payload.password) {
+      delete payload.password;
+    } else if (!isAdmin) {
+      // Usuário comum não pode enviar senha, mesmo se tentar forçar
+      this.snackbar.open(
+        'Somente administradores podem alterar a senha.',
+        'Fechar',
+        {
+          duration: 4000,
+          verticalPosition: 'top',
+          panelClass: ['custom-snackbar-warn'],
+        }
+      );
+      this.carregando = false;
+      return;
     }
 
     const operacao = this.isEdit
-      ? this.usuarioService.atualizarUsuario(this.userId, usuario)
+      ? this.usuarioService.atualizarUsuario(this.userId, payload)
       : this.usuarioService.cadastrarUsuario(usuario);
 
     operacao.subscribe({
