@@ -84,24 +84,9 @@ export class UsuariosFormComponent implements OnInit {
       delete payload.admin;
     }
 
-    // Regra 2: Senha só pode ser enviada se:
-    // - estiver preenchida
-    // - E o usuário for ADMIN
-    if (!payload.password) {
+    // 2. Se for edição, usuário comum não pode alterar senha
+    if (this.isEdit) {
       delete payload.password;
-    } else if (!isAdmin) {
-      // Usuário comum não pode enviar senha, mesmo se tentar forçar
-      this.snackbar.open(
-        'Somente administradores podem alterar a senha.',
-        'Fechar',
-        {
-          duration: 4000,
-          verticalPosition: 'top',
-          panelClass: ['custom-snackbar-warn'],
-        }
-      );
-      this.carregando = false;
-      return;
     }
 
     const operacao = this.isEdit

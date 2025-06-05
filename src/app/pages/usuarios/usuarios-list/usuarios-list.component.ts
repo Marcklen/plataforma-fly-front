@@ -103,12 +103,31 @@ export class UsuariosListComponent implements OnInit {
             });
             this.carregarUsuarios();
           },
-          error: () => {
-            this.snackBar.open('Erro ao excluir o usuário.', 'Fechar', {
-              duration: 4000,
-              verticalPosition: 'top',
-              panelClass: ['custom-snackbar-error'],
-            });
+          error: (err) => {
+            if (err.status === 403) {
+              this.snackBar.open(
+                'Apenas administradores podem excluir usuários.',
+                'Fechar',
+                {
+                  duration: 4000,
+                  verticalPosition: 'top',
+                  panelClass: ['custom-snackbar-warn'],
+                }
+              );
+            } else {
+              const mensagem =
+                err?.error?.message ||
+                (Array.isArray(err?.error?.errors)
+                  ? err.error.errors.join(', ')
+                  : null) ||
+                err.message ||
+                'Erro ao excluir o usuário.';
+              this.snackBar.open(mensagem, 'Fechar', {
+                duration: 4000,
+                verticalPosition: 'top',
+                panelClass: ['custom-snackbar-error'],
+              });
+            }
           },
         });
       }
