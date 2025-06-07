@@ -1,27 +1,101 @@
-# PlataformaFlyFront
+# 🛠️ Plataforma Fly — Frontend Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.11.
+Este repositório contém o frontend da aplicação **Plataforma Fly**, desenvolvido com **Angular 15.2.11**.  
+Ele se comunica com os microsserviços da plataforma via **API Gateway**, oferecendo uma interface moderna, responsiva e segura.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 🚀 Funcionalidades principais
 
-## Code scaffolding
+- Tela de login com autenticação via JWT  
+- Registro de usuários com validação de campos  
+- Dashboard dinâmico com gráficos (Admin e Usuário)  
+- Gerenciamento de usuários (CRUD)  
+- Envio e histórico de e-mails  
+- Redirecionamento e menus baseados em roles (ADMIN/USER)  
+- Suporte a Progressive Web App (PWA) — em desenvolvimento  
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+## 📄 Documento do desafio original
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Este projeto foi construído com base no desafio técnico **Treino Desenvolvedor**, que propõe a criação de um sistema completo utilizando Angular + Spring Boot + Microsserviços.
 
-## Running unit tests
+📁 [Acesse o Gist com o desafio completo aqui](https://gist.github.com/Marcklen/7bd61084e9561e5be02d0b0c1d36650d)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+---
 
-## Running end-to-end tests
+## 🧪 Tecnologias utilizadas
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- ✅ Angular 15.2.11  
+- ✅ TypeScript  
+- ✅ Angular Material + CDK  
+- ✅ RxJS  
+- ✅ JWT (Auth0 Angular JWT + jwt-decode)  
+- ✅ ng2-charts / Chart.js 3.9  
+- ✅ SCSS customizado  
+- ✅ Comunicação com backend via API Gateway  
 
-## Further help
+---
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## ⚙️ Como executar o projeto
+
+### 1. Instale as dependências
+
+```bash
+npm install
+```
+
+## ⚙️ Configuração de ambiente
+
+### 2. Configure as variáveis de ambiente
+
+Crie o arquivo `src/environments/environment.ts` com os dados de desenvolvimento:
+
+```ts
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:8080' // URL do API Gateway
+};
+```
+
+## ⚙️ Iniciando a aplicação
+
+### 3. Execute o comando
+
+```bash
+npm start
+```
+---
+## 🌐 Traduções e anonimização
+
+`|🇧🇷| Removido alguns nomes para não mostrar a empresa que solicitou esse desafio.`
+`|🇺🇸| Some names were removed to avoid showing the company that requested this challenge.`
+`|🇪🇸| Se eliminaron algunos nombres para no mostrar la empresa que solicitó este desafío`
+
+---
+## 📌 Observações finais
+
+Este frontend consome as APIs protegidas da Plataforma Fly e foi construído com foco em:
+
+- Escalabilidade
+
+- Responsividade
+
+- Integração total com a arquitetura de microsserviços em Java
+
+- O layout e a navegação foram pensados para diferentes perfis de usuário (administrador e usuário comum).
+
+---
+
+## 🧰 Suporte ao desenvolvedor
+
+> Este projeto foi gerado com [Angular CLI](https://angular.io/cli) versão 15.2.11.
+
+### Gerar novo componente ou serviço
+
+```bash
+ng generate component MeuComponente
+ng generate service MeuServico
+```
+
