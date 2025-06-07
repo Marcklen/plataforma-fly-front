@@ -66,11 +66,12 @@ export const environment = {
 ```bash
 npm start
 ```
+
 ---
 ## 🌐 Traduções e anonimização
 
-`|🇧🇷| Removido alguns nomes para não mostrar a empresa que solicitou esse desafio.`
-`|🇺🇸| Some names were removed to avoid showing the company that requested this challenge.`
+`|🇧🇷| Removido alguns nomes para não mostrar a empresa que solicitou esse desafio.` <br>
+`|🇺🇸| Some names were removed to avoid showing the company that requested this challenge.` <br>
 `|🇪🇸| Se eliminaron algunos nombres para no mostrar la empresa que solicitó este desafío`
 
 ---
